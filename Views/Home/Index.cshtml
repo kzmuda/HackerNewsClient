@@ -1,0 +1,52 @@
+﻿@model Codecool.HackerNewsClient.Models.NewsModel
+
+
+<div class="jumbotron">
+    Welcome
+</div>
+
+<div>
+    page: @Model.CurrentPage
+    @if (@Model.IsPrevPageAvailable)
+    {
+        @Html.ActionLink("Poprzednia", "Index", "Home", new { page = @Model.PrevPage })
+    }
+    else
+    {
+    <label>Poprzednia</label>
+    }
+    @Html.ActionLink("Następna", "Index", "Home", new { page = @Model.NextPage })
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        @Html.LabelFor(x => @Model.NewsList[0].TimeAgo)
+    </div>
+    <div class="col-md-3">
+        @Html.LabelFor(x => Model.NewsList[0].Title)
+    </div>
+    <div class="col-md-3">
+        @Html.LabelFor(x => Model.NewsList[0].User)
+    </div>
+    <div class="col-md-3">
+        @Html.LabelFor(x => Model.NewsList[0].Url)
+    </div>
+</div>
+
+@foreach (var news in @Model.NewsList)
+{
+    <div class="row">
+        <div class="col-md-3">
+            @Html.DisplayFor(x => news.TimeAgo)
+        </div>
+        <div class="col-md-3">
+            @Html.DisplayFor(x => news.Title)
+        </div>
+        <div class="col-md-3">
+            @Html.DisplayFor(x => news.User)
+        </div>
+        <div class="col-md-3">
+            <a href="@news.Url">Link</a>
+        </div>
+    </div>
+}
